@@ -100,6 +100,7 @@ html(lang="id" class="scroll-smooth")
           }
         }
     
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css")
     link(rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css")
     script(src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js')
@@ -337,50 +338,7 @@ html(lang="id" class="scroll-smooth")
         document.getElementById('cookieConsent').style.display = 'none';
       });
 
-      const slider = document.getElementById('slider');
-      const prevButton = document.getElementById('prev-slide');
-      const nextButton = document.getElementById('next-slide');
-      const slideCount = document.querySelectorAll('.slider-item').length;
-      let currentIndex = 0;
-      let interval;
-
-      function goToSlide(index) {
-        currentIndex = (index + slideCount) % slideCount;
-        slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-      }
-
-      function nextSlide() {
-        goToSlide(currentIndex + 1);
-      }
-
-      function prevSlide() {
-        goToSlide(currentIndex - 1);
-      }
-
-      function startSlider() {
-        interval = setInterval(nextSlide, 5000);
-      }
-
-      function stopSlider() {
-        clearInterval(interval);
-      }
-
-      if (slider) {
-        nextButton.addEventListener('click', () => {
-          stopSlider();
-          nextSlide();
-          startSlider();
-        });
-
-        prevButton.addEventListener('click', () => {
-          stopSlider();
-          prevSlide();
-          startSlider();
-        });
-
-        startSlider();
-      }
-
+    script(src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js")
     script(src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js")
     
     if adsenseEnabled

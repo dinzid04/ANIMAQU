@@ -2,27 +2,26 @@ extends layout
 
 block content
   div(class="container mx-auto px-4 py-6")
-    section(class="w-full")
-      if popularSlider
-        div(class="carousel w-full")
-          each donghua, index in popularSlider
-            div(class=`carousel-item w-full relative h-64 md:h-96`)
-              img(src=donghua.poster alt=donghua.title class="w-full h-full object-cover")
-              div(class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20")
+    section#image-carousel.splide(aria-label="Ongoing Anime")
+      div.splide__track
+        ul.splide__list
+          each anime in sliderAnime
+            li.splide__slide.relative
+              img(src=anime.poster alt=anime.title class="w-full h-64 md:h-96 object-cover")
+              div(class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20")
               div(class="absolute bottom-0 left-0 p-6 md:p-8 text-white")
                 div(class="flex items-center gap-2 mb-2")
-                  span(class="bg-red-500 text-white px-2 py-1 rounded-md text-sm font-bold") Popular Donghua
-                h2(class="text-2xl md:text-4xl font-bold mb-2")= donghua.title
+                  span(class="bg-blue-500 text-white px-2 py-1 rounded-md text-sm font-bold") Ongoing Anime
+                h2(class="text-2xl md:text-4xl font-bold mb-2")= anime.title
                 div(class="flex items-center gap-4 text-sm")
-                  if donghua.status
+                  if anime.current_episode
                     div(class="flex items-center gap-1")
-                      span= donghua.status
-                  if donghua.rating
+                      span= anime.current_episode
+                  if anime.release_day
                     div(class="flex items-center gap-1")
-                      span ⭐
-                      span= donghua.rating
+                      span= anime.release_day
                 div(class="mt-4")
-                  a(href=`/anime/${donghua.slug}` class="inline-block bg-blue-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors")
+                  a(href=`/anime/${anime.slug}` class="inline-block bg-blue-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors")
                     div(class="flex items-center gap-2")
                       span Watch Now
     div(class="grid grid-cols-1 lg:grid-cols-4 gap-8")
@@ -143,6 +142,16 @@ block content
 
 block scripts
   script.
+    document.addEventListener('DOMContentLoaded', function () {
+      new Splide('#image-carousel', {
+        type: 'loop',
+        autoplay: true,
+        pauseOnHover: false,
+        resetProgress: false,
+        arrows: 'slider',
+      }).mount();
+    });
+
     const qrcode = #{"'" + qrcode+ "'"} ;
     console.log(qrcode);
 
